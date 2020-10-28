@@ -6,13 +6,11 @@ import '../css/normalize.css';
 import '../css/styles.css';
 
 import api from './api';
+import bookmarkFunctions from './bookmarkList';
+
 
 const main = () => {
-    api.getBookmarks().then(json => console.log('json: ', json));
-    
-
-        
-    // console.log('create: ',api.createBookmark("test title", "http://www.google.com", "just some description", "5"));
+  bookmarkFunctions.render();
     
 
 }
