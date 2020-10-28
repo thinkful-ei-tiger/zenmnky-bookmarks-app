@@ -1,5 +1,8 @@
 # Bookmark App
-## by ZenMnky
+## *by ZenMnky*
+<br />
+<br />
+<br />
 
 ## Description
 
@@ -30,9 +33,10 @@ As a user:
 
 -  (Extension feature - optional) I can edit the rating and description of a bookmark in my list
 
-
-
-
+<br />
+<br />
+<br />
+<br />
 ===================================================================
-### Dev Enviornment Bootstrapped by the marvelous [jennabot5000](https://linktr.ee/jenna.chestnut)
+### 👉 Dev Enviornment Bootstrapped by the marvelous [jennabot5000](https://linktr.ee/jenna.chestnut)
 ===================================================================
