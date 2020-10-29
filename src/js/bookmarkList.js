@@ -2,19 +2,92 @@
 // templates and the such
 
 import $ from 'jquery';
+import storeModule from './store';
 
+
+const handleEditBookmarkElement = () => {
+
+}
+
+/*=============================================
+=            VIEW RENDERING            =
+=============================================*/
+/**
+ * master rendering function.
+ * handles the logic to determine what is rendered to the DOM
+ */
 const render = () => {
+        
+    if (storeModule.store.error){
+        console.log('error fired')
+        //render error view
+    } else if (storeModule.store.adding) {
+        //render create-new view
+        handleRenderView(renderCreateNewView);
+    } else {
+        //render initial view
+        handleRenderView(renderInitialView);
+    }
+};
+
+
+/*----------  Helper view rendering functions  ----------*/
+/**
+ * handleRenderView
+ * handles rendering page views into the DOM
+ * @param {function} viewToRender - function that returns an array of template generating functions
+ */
+const handleRenderView = (viewToRender) => {
+    // clear HTML template variable
     let pageHTML = ``;
+
+    //retreive the array of template functions from the provided function
+    let sectionsToRender = viewToRender();
+    
+    //call each function and get it's template string and add to the HTML template
+    sectionsToRender.forEach(sectionGenerator => pageHTML += sectionGenerator());
+
+    //inject into the DOM
+    $('body').html(pageHTML)
+};
+
+
+/**
+ * renderInitialView()
+ * provides the template functions for the initial view
+ * @returns {array}an array of section template generator functions
+ */
+const renderInitialView = () => {
     let sectionsToRender = [
         generateTitleSection,
         generateAddAndFilterSection,
         generateBookmarkContentArea
     ];
 
-    sectionsToRender.forEach(sectionGenerator => pageHTML += sectionGenerator())
-    $('body').html(pageHTML)
-}
+    return sectionsToRender;
+};
 
+
+/**
+ * renderCreateNewView()
+ * provides the template functions for the create-new view
+ * @returns {array} - an array of section template generator functions
+ */
+const renderCreateNewView = () => {
+    let sectionsToRender = [
+        generateTitleSection,
+        generateAddBookmarkSection,
+        generateBookmarkContentArea
+    ];
+
+    return sectionsToRender;
+};
+
+
+
+/*=============================================
+=            TEMPLATE GENERATORS            =
+=============================================*/
 const generateTitleSection = () => {
     let titleTemplate = `
     <div id="title" class="title">
@@ -111,10 +184,16 @@ const generateAddBookmarkSection = () => {
                         <option value="2">2 Stars</option>
                         <option value="1">1 Stars</option>
                     </select>
+
+                    <button type="submit" id="submitNewBookmark">Add</button>
+                    <button type="reset" id="clearSubmitNew">Clear</button>
+                    <button id="cancelSubmitNew">Cancel</button>
                 </fieldset>
             </form>
         </section>
     `;
+
+    return addBookmarkTemplate;
 }
 
 const generateErrorContainer = () => {
@@ -124,12 +203,76 @@ const generateErrorContainer = () => {
             <p>Error message</p>
         </section>
     `;
+
+    return errorContainerTemplate;
 }
 
-const handleEditBookmarkElement = () => {
 
+
+
+/*=============================================
+=            EVENT HANDLERS            =
+=============================================*/
+
+/**
+ * bindEventHandlers()
+ * All the event handlers bound in one function
+ */
+const bindEventHandlers = () => {
+    handleAddNewBookmark();
+    handleSubmitNewBookmark();
+    handleCancelNewBookmark();
+}
+
+/**
+ * handleAddNewBookmark()
+ * event handler. 
+ * updates the state of the store to indicate an adding state, then calls the render functions
+ */
+const handleAddNewBookmark = () => {
+    $('body').on('click', 'button#addBookmark', () => {
+        storeModule.store.adding = true;
+        render();
+    })
+}
+
+/**
+ * handleSubmitNewBookmark()
+ * event handler. 
+ * adds new bookmark to api, updates state of store, renders page
+ * 
+ */
+const handleSubmitNewBookmark = () => {
+    $('body').on('click', 'button#submitNewBookmark', (event) => {
+        event.preventDefault();
+
+        // reset store adding state back to default
+        storeModule.store.adding = false;
+
+        // 🚧 Update API 🚧
+
+
+        // 🚧 Update API 🚧
+
+        render();
+    })
+};
+
+/**
+ * handleCancelNewBookmark()
+ * event handler
+ * updates the state of the store to indicate adding is false, then calls the render functions
+ */
+const handleCancelNewBookmark = () => {
+    $('body').on('click', 'button#cancelSubmitNew', (event) => {
+        event.preventDefault();
+        // reset store adding state back to default
+        storeModule.store.adding = false;
+        render();
+    })
 }
 
 export default {
-    render
+    render,
+    bindEventHandlers
 };

@@ -4,6 +4,15 @@ const BASE_URL = 'https://thinkful-list-api.herokuapp.com';
 const username = 'zenmnky-bookmarks';
 let url = `${BASE_URL}/${username}/bookmarks`;
 
+
+/**
+ * createBookmark
+ * Creates a new JSON object and POSTs it to the API
+ * @param {string} newTitle - bookmark title
+ * @param {string} newUrl - must begin with 'http' or 'https'
+ * @param {string} newDesc - bookmark description
+ * @param {string} newRating - should be a number, 1-5
+ */
 const createBookmark = (newTitle, newUrl, newDesc, newRating) => {
     let newItem = JSON.stringify({
         title: newTitle,
@@ -19,10 +28,22 @@ const createBookmark = (newTitle, newUrl, newDesc, newRating) => {
     })
 }
 
+
+/**
+ * getBookmarks
+ * Performs a GET request to API
+ * @returns {XMLDocument} Data from API
+ */
 const getBookmarks = () => {
-    return fetch(url);        
+    return fetch(url);
 }
 
+/**
+ * updateBookmark
+ * PATCH request to API to update a bookmark object
+ * @param {number} id - id of bookmark object
+ * @param {object} updateData - contains key-value pairs to update
+ */
 const updateBookmark = (id, updateData) => {
     let patchURL = `${url}/${id}`;
 
@@ -33,6 +54,11 @@ const updateBookmark = (id, updateData) => {
     });
 }
 
+/**
+ * deleteBookmark
+ * DELETE request to API to delete a bookmark object
+ * @param {number} id - id of bookmark object
+ */
 const deleteBookmark = (id) => {
     let deleteURL = `${url}/${id}`;
     

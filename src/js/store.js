@@ -41,3 +41,7 @@ const store = {
   const handleFilterBookmarks = () => {
 
   }
+
+  export default {
+    store
+  }
