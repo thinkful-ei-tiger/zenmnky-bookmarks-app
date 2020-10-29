@@ -1,0 +1,81 @@
+<!-- Add New Bookmark View -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bookmark App</title>
+</head>
+<body>
+    <div class="title">
+        <h1>Bookmark App</h1>
+    </div>
+    <section id="addAndFilterContainer" class="addAndFilter">
+        <button id="addBookmark">Add New</button>
+        <select name="filterByRating" id="filterByRating">
+            <option selected disabled>Filter by Rating</option>
+            <option value="5">5 Stars</option>
+            <option value="4">4 Stars</option>
+            <option value="3">3 Stars</option>
+            <option value="2">2 Stars</option>
+            <option value="1">1 Stars</option>
+        </select>
+    </section>
+    <section class="addBookmarkView">
+        <form action="#" id="createNewForm" class="createNew">
+            <fieldset>
+                <legend>Create New Bookmark: </legend>
+                
+                <label for="bookmarkTitle">Title:</label>
+                <input type="text" name="bookmarkTitle" id="bookmarkTitle" placeholder="Title">
+                
+                <label for="bookmarkLink">Link:</label>
+                <input type="text" name="bookmarkLink" id="bookmarkLink" placeholder="http://www.YourLinkHere">
+
+                <label for="bookmarkDescription">Description</label>
+                <textarea name="bookmarkDescription" id="bookmarkDescription" placeholder="Enter a helpful description for your link" ></textarea>
+
+                <select name="selectRating" id="selectRating">
+                    <option selected disabled>Select Rating</option>
+                    <option value="5">5 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="3">3 Stars</option>
+                    <option value="2">2 Stars</option>
+                    <option value="1">1 Stars</option>
+                </select>
+
+                <button type="submit" id="submitNewBookmark">Add</button>
+                <button type="reset" id="clearSubmitNew">Clear</button>
+                <button id="cancelSubmitNew">Cancel</button>
+            </fieldset>
+        </form>
+    </section>
+    <section id="contentArea" class="contentArea">
+        <div class="bookmarkItem">
+            <div class="bookmarkTitleArea">
+                <h3>My Bookmark</h3>
+            </div>
+            <div class="bookmarkRatingArea">
+                Rating Icons
+            </div>
+        </div>
+        <div class="bookmarkItem">
+            <div class="bookmarkTitleArea">
+                <h3>My Bookmark</h3>
+            </div>
+            <div class="bookmarkRatingArea">
+                Rating Icons
+            </div>
+        </div>
+        <div class="bookmarkItem">
+            <div class="bookmarkTitleArea">
+                <h3>My Bookmark</h3>
+            </div>
+            <div class="bookmarkRatingArea">
+                Rating Icons
+            </div>
+        </div>
+    </section>
+    
+</body>
+</html>

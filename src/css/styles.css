@@ -1,0 +1,124 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 10px;
+    width: 90vw;
+}
+.title {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 15px;
+}
+h1, h2, h3 {
+    margin: 0;
+}
+
+.title h1 {
+    padding: 10px 0;
+}
+
+#addAndFilterContainer {
+    padding: 20px 5px;
+    background-color: grey;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+/*----------  Create New Bookmark Form  ----------*/
+.createNew {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-item {
+    padding: 5px 0;
+    width: 100%;
+ }
+ 
+.form-item textarea {
+     width: 100%;
+} 
+
+fieldset { 
+    padding: 10px 12px;
+    margin: 10px 10px 20px 10px;
+    border-radius: 6px;
+}
+
+legend {
+    padding: 3px 6px;
+    background-color: grey;
+    color: white;
+    border-radius: 8px;
+}
+
+label {
+    display: block;
+    padding-bottom: 3px;;
+}
+
+form select {
+    padding-bottom: 3px;
+}
+
+form textarea {
+    height: 4.75rem;
+}
+
+form button {
+    margin-bottom: 5px;
+}
+
+
+/*----------  Bookmark Items  ----------*/
+
+
+.bookmarkItem {
+    margin: 10px 20px;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.bookmarkTitleArea {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.bookmarkItem h3 {
+    color: white;
+    padding: 10px 5px;
+}
+.bookmarkTitleArea {
+    background-color: grey;
+}
+
+.bookmarkRatingArea {
+    padding-top: 8px;
+}
+
+button {
+    border-radius: 5px;
+}
+
+.bookmarkTitleArea button {
+    margin: 5px 5px 5px 0;
+}
+
+/*=============================================
+=            Media Queries            =
+=============================================*/
+
+@media all and (min-width: 800px) {
+    body {
+        max-width: 800px;
+        margin: auto;
+        margin-top: 20px;
+        border: solid 1px black;
+    }
+    
+
+}
+
