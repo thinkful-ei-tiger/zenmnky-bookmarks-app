@@ -291,14 +291,16 @@ const handleClickedBookmark = () => {
         let bookmark = storeModule.findById(id);
 
         if( $(event.target).is('button') ) {
-            // 🚧 Find and Delete Bookmark
+            api.deleteBookmark(id)
+                .then( () => storeModule.updateLocalBookmarks() )
+                .then( () => render() );
+            
             console.log('delete button clicked');
         } else {   
             //toggle the 'expanded' property
             storeModule.toggleExpandedView(bookmark);
+            render()
         }
-
-        render();
     })
 }
 
