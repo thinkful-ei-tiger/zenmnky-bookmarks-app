@@ -137,6 +137,7 @@ const generateBookmarkElement = (bookmarkObj) => {
     <div class="bookmarkItem js-bookmarkItem" data-item-id=${bookmarkObj.id}>
         <div class="bookmarkTitleArea">
             <h3>${bookmarkObj.title}</h3>
+            <button id="deleteBookmark">× Delete</button>
         </div>
     `;
 
@@ -160,19 +161,6 @@ const generateBookmarkElement = (bookmarkObj) => {
     return bookmarkItemTemplate;
 }
 
-const generateExpandedBookmarkSection = () => {
-    const expandedViewTemplate = `
-    <div class="bookmarkItem expanded-view">
-        <div class="bookmarkTitleArea">
-            <h3>TITLE GOES HERE</h3>
-        </div>
-
-        <div class="bookmarkRatingArea">
-            RATING ICONS GO HERE
-        </div>
-    </div>
-    `;
-}
 
 const generateAddBookmarkSection = () => {
     const addBookmarkTemplate = `
@@ -301,10 +289,16 @@ const handleClickedBookmark = () => {
         let id = getItemIdFromElement(event.currentTarget);
         //find the bookmark object in the store's bookmark array
         let bookmark = storeModule.findById(id);
-        //toggle the 'expanded' property
-        storeModule.toggleExpandedView(bookmark);
-        //render
-        render();  
+
+        if( $(event.target).is('button') ) {
+            // 🚧 Find and Delete Bookmark
+            console.log('delete button clicked');
+        } else {   
+            //toggle the 'expanded' property
+            storeModule.toggleExpandedView(bookmark);
+        }
+
+        render();
     })
 }
 
