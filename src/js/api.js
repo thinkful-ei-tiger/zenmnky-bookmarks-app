@@ -21,7 +21,7 @@ const apiFetch = (...args) => {
             //if response is ok, parse JSON
             return response.json();
 
-        });
+        })
         .then(data => {
             if (error) {
                 error.message = data.message;
