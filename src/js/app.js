@@ -6,18 +6,16 @@ import '../css/normalize.css';
 import '../css/styles.css';
 
 import api from './api';
+import storeModule from './store';
 import bookmarkFunctions from './bookmarkList';
 
 
-const main = () => {
-  bookmarkFunctions.render();
-  bookmarkFunctions.bindEventHandlers();
-  
-  api.getBookmarks()
-    .then(res => res.json())
-    .then(jsonResp => console.log(jsonResp))
-    .catch(error => console.log(error))
-  
+//populate the local store object based on data from the API
+storeModule.updateLocalBookmarks();
+
+const main = () => {  
+ storeModule.updateLocalBookmarks();  
+ bookmarkFunctions.bindEventHandlers();  
 }
 
 $(main);

@@ -3,6 +3,8 @@
 
 import $ from 'jquery';
 import storeModule from './store';
+import api from './api';
+import store from './store';
 
 
 const handleEditBookmarkElement = () => {
@@ -119,23 +121,38 @@ const generateAddAndFilterSection = () => {
 const generateBookmarkContentArea = () => {
     let sectionTemplate = `<section id="contentArea" class="contentArea">`;
 
-    for(let i=0; i < 3; i++){
-        sectionTemplate += generateBookmarkElement();
-    }
+    //for each bookmark object in the store's bookmark array,
+    //create a bookmark element
+    storeModule.store.bookmarks.forEach(bookmark => {
+        sectionTemplate += generateBookmarkElement(bookmark);
+    });
 
     sectionTemplate += `</section>`;
 
     return sectionTemplate;
 }
 
-const generateBookmarkElement = () => {
-    const bookmarkItemTemplate = `
-    <div class="bookmarkItem">
+const generateBookmarkElement = (bookmarkObj) => {
+    let bookmarkItemTemplate = `
+    <div class="bookmarkItem js-bookmarkItem" data-item-id=${bookmarkObj.id}>
         <div class="bookmarkTitleArea">
-            <h3>TITLE GOES HERE</h3>
+            <h3>${bookmarkObj.title}</h3>
         </div>
+    `;
+
+    if(bookmarkObj.expanded){
+        bookmarkItemTemplate += `
+            <div class="bookMarkDescriptionArea">
+                <p>${bookmarkObj.description}</p>
+            </div>
+            <a href=${bookmarkObj.url}><button id="viewSiteBtn">View Site</button></a>
+        `;
+    }
+    
+
+    bookmarkItemTemplate += `
         <div class="bookmarkRatingArea">
-            RATING ICONS GO HERE
+            <p>Rating: ${bookmarkObj.rating}</p>
         </div>
     </div>
     `;
@@ -149,10 +166,7 @@ const generateExpandedBookmarkSection = () => {
         <div class="bookmarkTitleArea">
             <h3>TITLE GOES HERE</h3>
         </div>
-        <div class="bookMarkDescriptionArea">
-            <p>User's bookmark descriptoin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac suscipit sapien. Fusce vel odio velit. Donec ut tincidunt nisi, sit amet luctus enim.</p>
-        </div>
-        <button id="viewSiteBtn">View Site</button>
+
         <div class="bookmarkRatingArea">
             RATING ICONS GO HERE
         </div>
@@ -168,10 +182,10 @@ const generateAddBookmarkSection = () => {
                     <legend>Create New Bookmark: </legend>
                     
                     <label for="bookmarkTitle">Title:</label>
-                    <input type="text" name="bookmarkTitle" id="bookmarkTitle: placeholder="Title">
+                    <input type="text" name="bookmarkTitle" id="bookmarkTitle" placeholder="Title">
                     
                     <label for="bookmarkLink">Link:</label>
-                    <input type="text" name="bookmarkLink" id="bookmarkLink: placeholder="http://www.YourLinkHere">
+                    <input type="text" name="bookmarkLink" id="bookmarkLink" placeholder="http://www.YourLinkHere">
 
                     <label for="bookmarkDescription">Description</label>
                     <textarea name="bookmarkDescription" id="bookmarkDescription" placeholder="Enter a helpful description for your link" ></textarea>
@@ -222,6 +236,7 @@ const bindEventHandlers = () => {
     handleAddNewBookmark();
     handleSubmitNewBookmark();
     handleCancelNewBookmark();
+    handleClickedBookmark();
 }
 
 /**
@@ -249,12 +264,16 @@ const handleSubmitNewBookmark = () => {
         // reset store adding state back to default
         storeModule.store.adding = false;
 
-        // 🚧 Update API 🚧
+        //grab the data from the fields, stringify it, and send it to the API
+        let newTitle = $('input[type=text]#bookmarkTitle').val();
+        let newUrl = $('input[type=text]#bookmarkLink').val();
+        let newDesc = $('#bookmarkDescription').val();
+        let newRating = $('#selectRating').val();
 
-
-        // 🚧 Update API 🚧
-
-        render();
+    
+        api.createBookmark(newTitle, newUrl, newDesc, newRating)
+            // call the get bookmark functions, which will render the page    
+            .then(() => api.getBookmarks());
     })
 };
 
@@ -271,6 +290,35 @@ const handleCancelNewBookmark = () => {
         render();
     })
 }
+
+/**
+ * handleClickedBookmark
+ * When a bookmark element is clicked, toggle the expanded key-value property
+ */
+const handleClickedBookmark = () => {
+    $('body').on('click', '.js-bookmarkItem', (event) => {
+        //get the bookmark's id
+        let id = getItemIdFromElement(event.currentTarget);
+        //find the bookmark object in the store's bookmark array
+        let bookmark = storeModule.findById(id);
+        //toggle the 'expanded' property
+        storeModule.toggleExpandedView(bookmark);
+        //render
+        render();  
+    })
+}
+
+/**
+ * getItemIdFromElement
+ * Retreivies the item-id stored in the custom data attribute of a bookmark element
+ * @param {element} item - DOM Element
+ * @returns {string} - id stored in data-item-id
+ */
+const getItemIdFromElement = (item) => {
+    return $(item)
+      .closest('.js-bookmarkItem')
+      .data('item-id');
+  };
 
 export default {
     render,
