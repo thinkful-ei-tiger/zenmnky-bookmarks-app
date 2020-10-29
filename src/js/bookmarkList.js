@@ -169,27 +169,35 @@ const generateAddBookmarkSection = () => {
                 <fieldset>
                     <legend>Create New Bookmark: </legend>
                     
-                    <label for="bookmarkTitle">Title:</label>
-                    <input type="text" name="bookmarkTitle" id="bookmarkTitle" placeholder="Title">
-                    
-                    <label for="bookmarkLink">Link:</label>
-                    <input type="text" name="bookmarkLink" id="bookmarkLink" placeholder="http://www.YourLinkHere">
+                    <div class='form-item'>
+                        <label for="bookmarkTitle">Title:</label>
+                        <input type="text" name="bookmarkTitle" id="bookmarkTitle" placeholder="Title">
+                    </div>
 
-                    <label for="bookmarkDescription">Description</label>
-                    <textarea name="bookmarkDescription" id="bookmarkDescription" placeholder="Enter a helpful description for your link" ></textarea>
+                    <div class='form-item'>
+                        <label for="bookmarkLink">Link:</label>
+                        <input type="text" name="bookmarkLink" id="bookmarkLink" placeholder="http://www.YourLinkHere">
+                    </div>
 
-                    <select name="selectRating" id="selectRating">
-                        <option selected disabled>Select Rating</option>
-                        <option value="5">5 Stars</option>
-                        <option value="4">4 Stars</option>
-                        <option value="3">3 Stars</option>
-                        <option value="2">2 Stars</option>
-                        <option value="1">1 Stars</option>
-                    </select>
+                    <div class='form-item'>
+                        <label for="bookmarkDescription">Description</label>
+                        <textarea name="bookmarkDescription" id="bookmarkDescription" placeholder="Enter a helpful description for your link" ></textarea>
+                    </div>
 
-                    <button type="submit" id="submitNewBookmark">Add</button>
-                    <button type="reset" id="clearSubmitNew">Clear</button>
-                    <button id="cancelSubmitNew">Cancel</button>
+                    <div class='form-item'>
+                        <select name="selectRating" id="selectRating">
+                            <option selected disabled>Select Rating</option>
+                            <option value="5">5 Stars</option>
+                            <option value="4">4 Stars</option>
+                            <option value="3">3 Stars</option>
+                            <option value="2">2 Stars</option>
+                            <option value="1">1 Stars</option>
+                        </select>
+                    </div>
+
+                    <button class='form-item' type="submit" id="submitNewBookmark">Add</button>
+                    <button class='form-item' type="reset" id="clearSubmitNew">Clear</button>
+                    <button class='form-item' id="cancelSubmitNew">Cancel</button>
                 </fieldset>
             </form>
         </section>
