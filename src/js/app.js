@@ -14,6 +14,8 @@ import bookmarkFunctions from './bookmarkList';
 storeModule.updateLocalBookmarks();
 
 const main = () => {  
+ //get bookmarks from api and update local store
+ 
  storeModule.updateLocalBookmarks();  
  bookmarkFunctions.bindEventHandlers();  
 }

@@ -5,6 +5,34 @@ const username = 'zenmnky-bookmarks';
 let url = `${BASE_URL}/${username}/bookmarks`;
 
 
+const apiFetch = (...args) => {
+    let error;
+    return fetch(...args)
+        .then(response => {
+            if(!response.ok){
+                // if the response is not 2xx, begin building an error object
+                error = { code: response.status };
+
+                if (!res.headers.get('content-type').includes('json')){
+                    error.message = response.statusText;
+                    return Promise.reject(error);
+                }
+            }
+            //if response is ok, parse JSON
+            return response.json();
+
+        });
+        .then(data => {
+            if (error) {
+                error.message = data.message;
+                return Promise.reject(error);
+            }
+
+            return data;
+        });
+};
+
+
 /**
  * createBookmark
  * Creates a new JSON object and POSTs it to the API
@@ -12,6 +40,8 @@ let url = `${BASE_URL}/${username}/bookmarks`;
  * @param {string} newUrl - must begin with 'http' or 'https'
  * @param {string} newDesc - bookmark description
  * @param {string} newRating - should be a number, 1-5
+ * 
+ * @returns {promise}
  */
 const createBookmark = (newTitle, newUrl, newDesc, newRating) => {
     let newItem = JSON.stringify({
@@ -66,6 +96,10 @@ const deleteBookmark = (id) => {
         method: 'DELETE'
     });
 }
+
+/*=============================================
+=            export the goods            =
+=============================================*/
 
 export default {
     createBookmark,

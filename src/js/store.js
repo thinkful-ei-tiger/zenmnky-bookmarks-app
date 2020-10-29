@@ -66,23 +66,27 @@ const toggleExpandedView = (bookmarkObj) => {
 
 const addBookmark = () => {
 
-  }
+}
 
-  const handleAddingNewBookmark = () => {
+const handleAddingNewBookmark = () => {
 
-  }
+}
 
-  const handleError = () => {
+const handleError = () => {
 
-  }
+}
 
-  const handleFilterBookmarks = () => {
+const handleFilterBookmarks = () => {
 
-  }
+}
 
-  export default {
-    store,
-    updateLocalBookmarks,
-    findById,
-    toggleExpandedView
-  }
+/*=============================================
+=            export the goods            =
+=============================================*/
+
+export default {
+  store,
+  updateLocalBookmarks,
+  findById,
+  toggleExpandedView
+}
