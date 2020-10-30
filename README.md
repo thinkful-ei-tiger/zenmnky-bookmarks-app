@@ -45,7 +45,7 @@ As a user:
 - Use semantic HTML ✔️
 - Use responsive design ✔️
     - Visually and functionally solid in viewports for mobile and desktop ✔️
-- Follow a11y best practices 🚧 *still need to run through validator*
+- Follow a11y best practices ✔️
 - (Extension) Follow AJAX and a11y best practices
 
 <br />
