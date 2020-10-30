@@ -73,7 +73,7 @@ const generateBookmarkElement = (bookmarkObj) => {
     if(bookmarkObj.expanded){
         bookmarkItemTemplate += `
             <div class="bookMarkDescriptionArea">
-                <p>${bookmarkObj.description}</p>
+                <p>${bookmarkObj.desc}</p>
             </div>
             <a href=${bookmarkObj.url} target="_blank"><button id="viewSiteBtn">View Site</button></a>
         `;
