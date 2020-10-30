@@ -17,6 +17,7 @@ const render = () => {
     if (storeModule.store.error){
         console.log('error fired')
         //render error view
+        // 🚧 ERROR VIEW 🚧
     } else if (storeModule.store.adding) {
         //render create-new view
         handleRenderView(renderCreateNewView);
@@ -93,6 +94,18 @@ const bindEventHandlers = () => {
     handleSubmitNewBookmark();
     handleCancelNewBookmark();
     handleClickedBookmark();
+    handleFilterByChange();
+}
+
+const handleFilterByChange = () => {
+    $('body').on('change', '#filterByRating', () => {
+        //grab the value of filterByRating
+        let newFilterVal =  $('#filterByRating').val();
+        //update the filter value in the store
+        storeModule.store.filter = newFilterVal;
+        //render
+        render();
+    })
 }
 
 /**
@@ -129,7 +142,15 @@ const handleSubmitNewBookmark = () => {
     
         api.createBookmark(newTitle, newUrl, newDesc, newRating)
             // call the get bookmark functions, which will render the page    
-            .then(() => api.getBookmarks());
+            .then((newItem) => {
+                storeModule.addBookmark(newItem);
+                render();
+            })
+            .catch((error) => {
+                // 🚧 Under Construction 🚧
+                //store error message 
+                //render error
+            })
     })
 };
 
@@ -160,10 +181,18 @@ const handleClickedBookmark = () => {
 
         if( $(event.target).is('button') ) {
             api.deleteBookmark(id)
-                .then( () => storeModule.updateLocalBookmarks() )
-                .then( () => render() );
+                .then( () => {
+                    storeModule.findAndDeleteBookmark(id);
+                    render();
+                })
+                .then( () => render() )
+                .catch((error) => {
+                    // 🚧 Under Construction 🚧
+                    //store error message 
+                    //render error
+                })
             
-            console.log('delete button clicked');
+            console.log('delete button clicked')
         } else {   
             //toggle the 'expanded' property
             storeModule.toggleExpandedView(bookmark);

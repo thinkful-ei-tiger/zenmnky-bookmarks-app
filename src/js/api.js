@@ -1,10 +1,20 @@
-//CRUD functions
+
+/*=============================================
+=            CRUD Functions            =
+=============================================*/
+
 // API Documentation: https://thinkful-list-api.herokuapp.com/endpoints/bookmarks
+
 const BASE_URL = 'https://thinkful-list-api.herokuapp.com';
 const username = 'zenmnky-bookmarks';
 let url = `${BASE_URL}/${username}/bookmarks`;
 
-
+/**
+ * apiFetch
+ * Handles API calls and related errors 
+ * @param  {...any} args - Fetch url and optional object with modifiers (method, headers, body)
+ * @returns {object} - returns JSON object
+ */
 const apiFetch = (...args) => {
     let error;
     return fetch(...args)
@@ -51,7 +61,7 @@ const createBookmark = (newTitle, newUrl, newDesc, newRating) => {
         rating: newRating
     })
 
-    return fetch(url, {
+    return apiFetch(url, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json'},
         body: newItem
@@ -65,8 +75,10 @@ const createBookmark = (newTitle, newUrl, newDesc, newRating) => {
  * @returns {XMLDocument} Data from API
  */
 const getBookmarks = () => {
-    return fetch(url);
+    return apiFetch(url);
 }
+
+
 
 /**
  * updateBookmark
@@ -77,7 +89,7 @@ const getBookmarks = () => {
 const updateBookmark = (id, updateData) => {
     let patchURL = `${url}/${id}`;
 
-    return fetch(patchURL, {
+    return apiFetch(patchURL, {
         method: 'PATCH',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify(updateData)
@@ -92,7 +104,7 @@ const updateBookmark = (id, updateData) => {
 const deleteBookmark = (id) => {
     let deleteURL = `${url}/${id}`;
     
-    return fetch(deleteURL, {
+    return apiFetch(deleteURL, {
         method: 'DELETE'
     });
 }

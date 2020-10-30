@@ -24,6 +24,7 @@ const generateAddAndFilterSection = () => {
             <option value="3">3 Stars</option>
             <option value="2">2 Stars</option>
             <option value="1">1 Stars</option>
+            <option value="0">No Filter</option>
         </select>
     </section>
     `;
@@ -33,12 +34,27 @@ const generateAddAndFilterSection = () => {
 
 const generateBookmarkContentArea = () => {
     let sectionTemplate = `<section id="contentArea" class="contentArea">`;
+    const localBookmarkArray = storeModule.store.bookmarks;
+    let filterRating = storeModule.store.filter;
 
     //for each bookmark object in the store's bookmark array,
     //create a bookmark element
-    storeModule.store.bookmarks.forEach(bookmark => {
-        sectionTemplate += generateBookmarkElement(bookmark);
-    });
+    if(filterRating === 0) {
+        // no filter is applied. display all bookmarks
+        localBookmarkArray.forEach(bookmark => {
+            sectionTemplate += generateBookmarkElement(bookmark);
+        });
+    } else {
+        //select only those bookmarks >= seleted rating
+        let filteredBookmarks = localBookmarkArray.filter(bookmark => {
+            return bookmark.rating >= filterRating
+        });
+        //generate a DOM element for each bookmark
+        filteredBookmarks.forEach(bookmark => {
+            sectionTemplate += generateBookmarkElement(bookmark);
+        });
+    }
+    
 
     sectionTemplate += `</section>`;
 
@@ -66,7 +82,7 @@ const generateBookmarkElement = (bookmarkObj) => {
 
     bookmarkItemTemplate += `
         <div class="bookmarkRatingArea">
-            <p>Rating: ${bookmarkObj.rating}</p>
+            <p>Rating: ${bookmarkObj.rating} stars</p>
         </div>
     </div>
     `;
