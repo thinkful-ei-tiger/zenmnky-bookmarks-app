@@ -54,7 +54,9 @@ As a user:
 <br />
 <br />
 <br />
+
 ===================================================================
-### 👉 Dev Enviornment Bootstrapped by the marvelous 
+
+👉 Dev Enviornment Bootstrapped by the marvelous 
 [jennabot5000](https://linktr.ee/jenna.chestnut)
-===================================================================
+
