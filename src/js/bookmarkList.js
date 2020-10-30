@@ -217,7 +217,7 @@ const handleClickedBookmark = () => {
         //find the bookmark object in the store's bookmark array
         let bookmark = storeModule.findById(id);
 
-        if( $(event.target).is('button') ) {
+        if( $(event.target).is('button#deleteBookmark') ) {
             api.deleteBookmark(id)
                 .then( () => {
                     storeModule.findAndDeleteBookmark(id);
@@ -229,7 +229,6 @@ const handleClickedBookmark = () => {
                     render();
                 })
             
-            console.log('delete button clicked')
         } else {   
             //toggle the 'expanded' property
             storeModule.toggleExpandedView(bookmark);

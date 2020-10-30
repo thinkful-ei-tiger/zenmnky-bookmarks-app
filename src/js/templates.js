@@ -75,7 +75,7 @@ const generateBookmarkElement = (bookmarkObj) => {
             <div class="bookMarkDescriptionArea">
                 <p>${bookmarkObj.description}</p>
             </div>
-            <a href=${bookmarkObj.url}><button id="viewSiteBtn">View Site</button></a>
+            <a href=${bookmarkObj.url} target="_blank"><button id="viewSiteBtn">View Site</button></a>
         `;
     }
     
