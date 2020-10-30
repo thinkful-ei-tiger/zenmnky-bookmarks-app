@@ -202,6 +202,7 @@ const handleCancelNewBookmark = () => {
         event.preventDefault();
         // reset store adding state back to default
         storeModule.store.adding = false;
+        storeModule.store.error = null;
         render();
     })
 };
