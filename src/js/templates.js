@@ -100,21 +100,21 @@ const generateAddBookmarkSection = () => {
                     
                     <div class='form-item'>
                         <label for="bookmarkTitle">Title:</label>
-                        <input type="text" name="bookmarkTitle" id="bookmarkTitle" placeholder="Title">
+                        <input type="text" name="bookmarkTitle" id="bookmarkTitle" placeholder="Title" required>
                     </div>
 
                     <div class='form-item'>
                         <label for="bookmarkLink">Link:</label>
-                        <input type="text" name="bookmarkLink" id="bookmarkLink" placeholder="http://www.YourLinkHere">
+                        <input type="text" name="bookmarkLink" id="bookmarkLink" placeholder="http://www.YourLinkHere" required>
                     </div>
 
                     <div class='form-item'>
                         <label for="bookmarkDescription">Description</label>
-                        <textarea name="bookmarkDescription" id="bookmarkDescription" placeholder="Enter a helpful description for your link" ></textarea>
+                        <textarea name="bookmarkDescription" id="bookmarkDescription" placeholder="Enter a helpful description for your link" required></textarea>
                     </div>
 
                     <div class='form-item'>
-                        <select name="selectRating" id="selectRating">
+                        <select name="selectRating" id="selectRating" required>
                             <option selected disabled>Select Rating</option>
                             <option value="5">5 Stars</option>
                             <option value="4">4 Stars</option>
@@ -136,12 +136,27 @@ const generateAddBookmarkSection = () => {
 }
 
 const generateErrorContainer = () => {
-    let errorContainerTemplate = `
+    let error = storeModule.store.error;
+
+    let errorContainerTemplate = ``;
+    
+    if(error){
+        errorContainerTemplate = `
         <section id="errorContainer" class="error">
-            <h3>Error</h3>
-            <p>Error message</p>
+            <h3>Whoops! Something isn't quite right...Error: ${error.stats}</h3>
+            <pre>${error.message}</pre>
+            <p>Please make sure to complete all input fields and to begin your url with either 'http' or 'https'</p>
         </section>
-    `;
+        `;
+    } else {
+        errorContainerTemplate = `
+        <section id="errorContainer" class="error">
+            <h3>Whoops! Something isn't quite right...</h3>
+            <p>Please make sure to complete all input fields and to begin your url with either 'http' or 'https'</p>
+        </section>
+        `;
+    }
+    
 
     return errorContainerTemplate;
 }

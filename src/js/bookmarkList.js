@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import storeModule from './store';
 import api from './api';
-import store from './store';
 import templates from './templates';
 
 
@@ -15,9 +14,7 @@ import templates from './templates';
 const render = () => {
         
     if (storeModule.store.error){
-        console.log('error fired')
-        //render error view
-        // 🚧 ERROR VIEW 🚧
+        handleRenderView(renderErrorWithCreateNew);
     } else if (storeModule.store.adding) {
         //render create-new view
         handleRenderView(renderCreateNewView);
@@ -80,7 +77,16 @@ const renderCreateNewView = () => {
     return sectionsToRender;
 };
 
+const renderErrorWithCreateNew = () => {
+    let sectionsToRender = [
+        templates.generateTitleSection,
+        templates.generateErrorContainer,
+        templates.generateAddBookmarkSection,
+        templates.generateBookmarkContentArea
+    ];
 
+    return sectionsToRender;
+}
 /*=============================================
 =            EVENT HANDLERS            =
 =============================================*/
@@ -133,26 +139,58 @@ const handleSubmitNewBookmark = () => {
         // reset store adding state back to default
         storeModule.store.adding = false;
 
-        //grab the data from the fields, stringify it, and send it to the API
+        //grab the data from the fields
         let newTitle = $('input[type=text]#bookmarkTitle').val();
         let newUrl = $('input[type=text]#bookmarkLink').val();
         let newDesc = $('#bookmarkDescription').val();
         let newRating = $('#selectRating').val();
 
-    
-        api.createBookmark(newTitle, newUrl, newDesc, newRating)
+        if(doInputsHaveValues()){
+            // stringify it values in an object and send it to the API
+            api.createBookmark(newTitle, newUrl, newDesc, newRating)
             // call the get bookmark functions, which will render the page    
             .then((newItem) => {
                 storeModule.addBookmark(newItem);
                 render();
             })
             .catch((error) => {
-                // 🚧 Under Construction 🚧
-                //store error message 
-                //render error
+                storeModule.store.error = error;
+                render();
             })
+        } else {
+            alert(`All input fields must be completed and the url must begin with either 'http' or 'https'.`)
+            return false;
+        }
+
+
+        
     })
 };
+
+/**
+ *  doInputsHaveValues
+ * Helper function for Create New Bookmark
+ * Checks if all the input fields in 'create new bookmark form' have values
+ * @returns {boolean} 
+ */
+const doInputsHaveValues = () => {
+    //grab the data from the fields
+    let newTitle = $('input[type=text]#bookmarkTitle').val();
+    let newUrl = $('input[type=text]#bookmarkLink').val();
+    let newDesc = $('#bookmarkDescription').val();
+    let newRating = $('#selectRating').val();
+
+    if (newTitle == undefined
+        || newUrl == undefined
+        || newDesc == undefined
+        || newRating == undefined){
+        return false
+    } else {
+        return true;
+    }
+
+}   
+
 
 /**
  * handleCancelNewBookmark()
@@ -187,9 +225,8 @@ const handleClickedBookmark = () => {
                 })
                 .then( () => render() )
                 .catch((error) => {
-                    // 🚧 Under Construction 🚧
-                    //store error message 
-                    //render error
+                    storeModule.store.error = error;
+                    render();
                 })
             
             console.log('delete button clicked')
@@ -212,6 +249,8 @@ const getItemIdFromElement = (item) => {
       .closest('.js-bookmarkItem')
       .data('item-id');
   };
+
+
 
 
 

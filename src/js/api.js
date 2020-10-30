@@ -37,7 +37,6 @@ const apiFetch = (...args) => {
                 error.message = data.message;
                 return Promise.reject(error);
             }
-
             return data;
         });
 };

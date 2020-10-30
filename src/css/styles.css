@@ -26,6 +26,22 @@ h1, h2, h3 {
     justify-content: space-evenly;
 }
 
+
+/*----------  Error Container  ----------*/
+.error {
+    background-color: #e75480;
+    opacity: 80%;
+    border: solid #e75480 1px;
+    margin: 0 15px;
+    border-radius: 8px;
+}
+
+.error h3, pre, p {
+    padding: 5px;
+}
+
+
+
 /*----------  Create New Bookmark Form  ----------*/
 .createNew {
     display: flex;

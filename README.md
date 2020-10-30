@@ -27,7 +27,7 @@ As a user:
 
 - I can remove bookmarks from my bookmark list ✔️
 
-- I receive appropriate feedback when I cannot submit a bookmark 🚧
+- I receive appropriate feedback when I cannot submit a bookmark ✔️
 
 -  I can select from a dropdown a "minimum rating" to filter the list by all bookmarks rated at or above the chosen selection ✔️
 
