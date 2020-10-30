@@ -8,6 +8,8 @@
 
 An API-powered Bookmarks application that lets the user store and rate their custom web bookmarks
 
+[Link to Live App](https://thinkful-ei-tiger.github.io/zenmnky-bookmarks-app/)
+
 ## User Stories
 
 As a user:
@@ -45,7 +47,7 @@ As a user:
 - Use semantic HTML ✔️
 - Use responsive design ✔️
     - Visually and functionally solid in viewports for mobile and desktop ✔️
-- Follow a11y best practices 🚧 *still need to run through validator*
+- Follow a11y best practices ✔️
 - (Extension) Follow AJAX and a11y best practices
 
 <br />
