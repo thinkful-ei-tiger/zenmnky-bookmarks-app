@@ -8,6 +8,8 @@
 
 An API-powered Bookmarks application that lets the user store and rate their custom web bookmarks
 
+[Link to Live App](https://thinkful-ei-tiger.github.io/zenmnky-bookmarks-app/)
+
 ## User Stories
 
 As a user:
