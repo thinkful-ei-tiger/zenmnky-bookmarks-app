@@ -1,11 +1,12 @@
 * {
     box-sizing: border-box;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    max-width: 90vw;
 }
 
 body {
     margin: 10px;
-    width: 90vw;
+    max-width: 90vw;
 }
 .title {
     display: flex;
@@ -18,13 +19,17 @@ h1, h2, h3 {
 
 .title h1 {
     padding: 10px 0;
+    max-width: 98vw;
 }
 
-#addAndFilterContainer {
+
+.addAndFilter {
     padding: 20px 5px;
     background-color: grey;
     display: flex;
+    flex-direction: column;
     justify-content: space-evenly;
+    
 }
 
 
@@ -100,6 +105,7 @@ form button {
 
 .bookmarkTitleArea {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
 }
 
@@ -129,13 +135,18 @@ button {
 =============================================*/
 
 @media all and (min-width: 800px) {
-    body {
+    main {
         max-width: 800px;
         margin: auto;
         margin-top: 20px;
         border: solid 1px black;
     }
     
+    .bookmarkTitleArea,
+    .addAndFilter
+    {
+        flex-direction: row;
+    }
 
 }
 
