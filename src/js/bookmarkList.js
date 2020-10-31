@@ -3,6 +3,9 @@ import storeModule from './store';
 import api from './api';
 import templates from './templates';
 
+//DOM injection site
+const $injectionSite = $('main');
+
 
 /*=============================================
 =            VIEW RENDERING            =
@@ -42,7 +45,7 @@ const handleRenderView = (viewToRender) => {
     sectionsToRender.forEach(sectionGenerator => pageHTML += sectionGenerator());
 
     //inject into the DOM
-    $('body').html(pageHTML)
+    $($injectionSite).html(pageHTML)
 };
 
 
@@ -104,7 +107,7 @@ const bindEventHandlers = () => {
 }
 
 const handleFilterByChange = () => {
-    $('body').on('change', '#filterByRating', () => {
+    $($injectionSite).on('change', '#filterByRating', () => {
         //grab the value of filterByRating
         let newFilterVal =  $('#filterByRating').val();
         //update the filter value in the store
@@ -120,7 +123,7 @@ const handleFilterByChange = () => {
  * updates the state of the store to indicate an adding state, then calls the render functions
  */
 const handleAddNewBookmark = () => {
-    $('body').on('click', 'button#addBookmark', () => {
+    $($injectionSite).on('click', 'button#addBookmark', () => {
         storeModule.store.adding = true;
         render();
     })
@@ -133,7 +136,7 @@ const handleAddNewBookmark = () => {
  * 
  */
 const handleSubmitNewBookmark = () => {
-    $('body').on('click', 'button#submitNewBookmark', (event) => {
+    $($injectionSite).on('click', 'button#submitNewBookmark', (event) => {
         event.preventDefault();
 
         // reset store adding state back to default
@@ -198,7 +201,7 @@ const doInputsHaveValues = () => {
  * updates the state of the store to indicate adding is false, then calls the render functions
  */
 const handleCancelNewBookmark = () => {
-    $('body').on('click', 'button#cancelSubmitNew', (event) => {
+    $($injectionSite).on('click', 'button#cancelSubmitNew', (event) => {
         event.preventDefault();
         // reset store adding state back to default
         storeModule.store.adding = false;
@@ -212,7 +215,7 @@ const handleCancelNewBookmark = () => {
  * When a bookmark element is clicked, toggle the expanded key-value property
  */
 const handleClickedBookmark = () => {
-    $('body').on('click', '.js-bookmarkItem', (event) => {
+    $($injectionSite).on('click', '.js-bookmarkItem', (event) => {
         //get the bookmark's id
         let id = getItemIdFromElement(event.currentTarget);
         //find the bookmark object in the store's bookmark array
